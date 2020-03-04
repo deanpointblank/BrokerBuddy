@@ -40,6 +40,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# For Stock information
-gem 'stock_quote', '~> 3.0.0'
+# For user  information
 gem 'devise'
+gem 'simple_token_authentication', '~> 1.0'
