@@ -4,18 +4,27 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { BrowserRouter as Router, Route} from 'react-router-dom'
+
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk'
 
 import { allReducers } from './Reducers/index'
 
-const store = createStore(null, applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+import Navbar from './Components/Navbar'
+import UserContainer from './Containers/UserContainer';
+
+const store = createStore(allReducers, applyMiddleware(thunk))
 
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <Router>
+            <Navbar />
+            <Route exact path="/" component={App} />
+            <Route exact path="/user" component={UserContainer} />
+        </Router>
     </Provider>, 
     document.getElementById('root'));
 
