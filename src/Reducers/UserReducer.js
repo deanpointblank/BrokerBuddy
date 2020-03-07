@@ -7,17 +7,17 @@ const userReducer = (state = {
         case 'SET_LOGIN_PENDING':
             return {
                 ...state,
-                isLoginPending: action.type
+                isLoginPending: action.status
             }
         case 'SET_LOGIN_SUCCESS':
             return {
                 ...state,
-                isLoginSuccess: action.type
+                isLoginSuccess: action.status
             }
         case 'SET_LOGIN_ERROR':
             return {
                 ...state,
-                isLoginError: action.type
+                isLoginError: action.status
             }
         default:
             return state;
