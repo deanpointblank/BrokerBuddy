@@ -14,6 +14,8 @@ import { allReducers } from './Reducers/index'
 
 import Navbar from './Components/Navbar'
 import UserContainer from './Containers/UserContainer';
+import Login from './Containers/LogInRegister/LogIn'
+import Register from './Containers/LogInRegister/Register'
 
 const store = createStore(allReducers, applyMiddleware(thunk))
 
@@ -24,6 +26,8 @@ ReactDOM.render(
             <Navbar />
             <Route exact path="/" component={App} />
             <Route exact path="/user" component={UserContainer} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Register} />
         </Router>
     </Provider>, 
     document.getElementById('root'));
