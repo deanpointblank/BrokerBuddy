@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './CSS/App.css';
 
 function App() {
   return (
@@ -10,8 +10,6 @@ function App() {
         <h1>App component - home page</h1>
         <h3>splash page</h3>
         <ul>
-          <li>sign up</li>
-          <li>sign in</li>
           <li>What we do</li>
           <ul>
             <li>Stock tracking</li>

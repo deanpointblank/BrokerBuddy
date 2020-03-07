@@ -7,7 +7,7 @@ class Navbar extends Component {
             <nav>
                 <NavLink to="/" exact>Home</NavLink>
                 <NavLink to="/user" exact>User</NavLink>
-                <NavLink to="/" exact>Watch Lists</NavLink>
+                <NavLink to="/watchlist" exact>Watch Lists</NavLink>
                 <NavLink to="/login" exact>Log in</NavLink>
                 <NavLink to="/signup" exact>Sign Up</NavLink>
             </nav>

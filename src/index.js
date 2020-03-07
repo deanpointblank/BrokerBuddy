@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './CSS/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
@@ -16,6 +16,7 @@ import Navbar from './Components/Navbar'
 import UserContainer from './Containers/UserContainer';
 import Login from './Containers/LogInRegister/LogIn'
 import Register from './Containers/LogInRegister/Register'
+import WatchlistContainer from './Containers/WatchlistContatiner'
 
 const store = createStore(allReducers, applyMiddleware(thunk))
 
@@ -28,6 +29,7 @@ ReactDOM.render(
             <Route exact path="/user" component={UserContainer} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Register} />
+            <Route exact path="/watchlist" component={WatchlistContainer} />
         </Router>
     </Provider>, 
     document.getElementById('root'));
