@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import reducerActiveUser from './reducer-active-user'
+import userReducer from './UserReducer'
 
 
 export const allReducers = combineReducers({
-    activeUser: reducerActiveUser
+    userReducer: userReducer
 })

@@ -5,7 +5,7 @@ export const login = (email, password) => {
         dispatch({ type: 'SET_LOGIN_ERROR', status: null})
 
         fetch('http://localhost:3001/sessions', {
-            method: 'post',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
