@@ -2,7 +2,8 @@ const CurrentUserReducer = (state = {
     email: '',
     authentication_token: '',
     first_name: '',
-    last_name: ''
+    last_name: '',
+    logged_in: false
 }, action) => {
     switch(action.type){
         case 'CREATE_SESSION':
@@ -11,7 +12,8 @@ const CurrentUserReducer = (state = {
                 email: action.payload.email,
                 authentication_token: action.payload.authentication_token,
                 first_name: action.payload.first_name,
-                last_name: action.payload.last_name
+                last_name: action.payload.last_name,
+                logged_in: true
             }
         case 'DELETE_SESSION':
             return {
@@ -19,7 +21,8 @@ const CurrentUserReducer = (state = {
                 email: '',
                 authentication_token: '',
                 first_name: '',
-                last_name: ''
+                last_name: '',
+                logged_in: false
             }
         default:
             return state;

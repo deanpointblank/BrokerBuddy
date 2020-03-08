@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 class Navbar extends Component {
     render(){
-        if(this.props.user.authentication_token === ''){
+        if(this.props.user.logged_in === false){
             return (
                 <nav>
                     <NavLink to="/" exact>Home</NavLink>
