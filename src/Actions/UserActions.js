@@ -24,7 +24,14 @@ export const login = (email, password) => {
             }
         })
         .then(resp => {
-            console.log(resp)
+            dispatch({ type: 'SET_LOGIN_PENDING', payload: {
+                email: resp.email,
+                authentication_token: resp.authentication_token,
+                first_name: resp.first_name,
+                last_name: resp.last_name
+            }})
+
+            console.log(resp.email)
 
         })
         .catch(error => {
