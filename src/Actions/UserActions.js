@@ -31,10 +31,10 @@ export const login = (email, password) => {
                 last_name: resp.last_name
             }})
 
-            console.log(resp.email)
-
         })
         .catch(error => {
+            dispatch({ type: 'SET_LOGIN_SUCCESS', status: false})
+            dispatch({ type: 'SET_LOGIN_ERROR', status: true})
             console.log(error.message)
         })
     }
