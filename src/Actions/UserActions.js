@@ -15,8 +15,18 @@ export const login = (email, password) => {
                 password: password
             })
         })
-        .then(resp => resp.json())
-        .then(resp => console.log(resp))
+        .then(resp => {
+            if(resp.status === 201){
+                dispatch({ type: 'SET_LOGIN_PENDING', status: false})
+                dispatch({ type: 'SET_LOGIN_SUCCESS', status: true})
+                dispatch({ type: 'SET_LOGIN_ERROR', status: false})
+                return resp.json() 
+            }
+        })
+        .then(resp => {
+            console.log(resp)
+
+        })
         .catch(error => {
             console.log(error.message)
         })

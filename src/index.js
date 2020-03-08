@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
 
 import { allReducers } from './Reducers/index'
@@ -18,7 +18,10 @@ import Login from './Containers/LogInRegister/LogIn'
 import Register from './Containers/LogInRegister/Register'
 import WatchlistContainer from './Containers/WatchlistContatiner'
 
-const store = createStore(allReducers, applyMiddleware(thunk))
+const store = createStore(allReducers, compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ))
 
 
 ReactDOM.render(
