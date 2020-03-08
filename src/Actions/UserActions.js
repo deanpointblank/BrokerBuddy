@@ -24,7 +24,7 @@ export const login = (email, password) => {
             }
         })
         .then(resp => {
-            dispatch({ type: 'SET_LOGIN_PENDING', payload: {
+            dispatch({ type: 'CREATE_SESSION', payload: {
                 email: resp.email,
                 authentication_token: resp.authentication_token,
                 first_name: resp.first_name,
