@@ -1,4 +1,4 @@
-const RegisterReducer = (state = {
+const RegistrationStatusReducer = (state = {
     isRegisterSuccess: false,
     isRegisterPending: false,
     isRegisternError: null
@@ -24,4 +24,4 @@ const RegisterReducer = (state = {
     }
 }
 
-export default RegisterReducer;
+export default RegistrationStatusReducer;
