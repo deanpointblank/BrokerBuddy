@@ -26,20 +26,66 @@ class Register extends Component{
     render(){
         return(
             <form onSubmit={event => this.handleOnSubmit(event)}>
-                <label>Email</label>
-                <input type='email' name='email' value={this.state.email} onChange={event => this.handleOnChange(event)}/>
-                <br />
-                <label>First Name</label>
-                <input type='text' name='firstName' value={this.state.firstName} onChange={event => this.handleOnChange(event)}/>
-                <label>Last Name</label>
-                <input type='text' name='lastName' value={this.state.lastName} onChange={event => this.handleOnChange(event)}/>
-                <br/>
-                <label>Password</label>
-                <input type='password' name='password' value={this.state.password} onChange={event => this.handleOnChange(event)}/>
-                <label>Comfirm Password</label>
-                <input type='password' name='confirmedPassword' value={this.state.confirmedPassword} onChange={event => this.handleOnChange(event)}/>
-                <br />
-                <input type='submit' />
+                <div className='form-group'>
+                <label for='email'>Email</label>
+                <input 
+                    type='email' 
+                    name='email' 
+                    value={this.state.email} 
+                    onChange={event => this.handleOnChange(event)}
+                    id="email"
+                    className='form-control'
+                />
+                </div>
+                <div className='form-row'>
+                    <div className='form-group col-md-6'>
+                        <label for='firstName'>First Name</label>
+                        <input 
+                            type='text' 
+                            name='firstName' 
+                            value={this.state.firstName} 
+                            onChange={event => this.handleOnChange(event)}
+                            id="firstName"
+                            className='form-control'
+                        />
+                    </div>
+                    <div className='form-group col-md-6'>
+                        <label for='lastName'>Last Name</label>
+                        <input 
+                            type='text' 
+                            name='lastName' 
+                            value={this.state.lastName} 
+                            onChange={event => this.handleOnChange(event)}
+                            id="lastName"
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <div className='form-row'>
+                    <div className='form-group col-md-6'>
+                        <label for='password'>Password</label>
+                        <input 
+                            type='password' 
+                            name='password' 
+                            value={this.state.password} 
+                            onChange={event => this.handleOnChange(event)}
+                            id="password"
+                            className='form-control'
+                        />
+                    </div>
+                    <div className='form-group col-md-6'>
+                        <label for='confirmPassowrd'>Comfirm Password</label>
+                        <input 
+                            type='password' 
+                            name='confirmedPassword' 
+                            value={this.state.confirmedPassword} 
+                            onChange={event => this.handleOnChange(event)}
+                            id="confirmPassowrd"
+                            className='form-control'
+                        />
+                    </div>
+                </div>
+                <input type='submit' className="btn btn-primary" />
             </form>
         )
     }
