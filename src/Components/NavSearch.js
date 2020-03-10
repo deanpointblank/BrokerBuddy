@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchStocks } from '../Actions/StockActions'
 
 class NavSearch extends Component{
+
+
+    componentDidMount(){
+        this.props.fetchStocks()
+    }
+
     render(){
         return(
             <form className="form-inline" autoComplete='off'>
@@ -11,4 +19,17 @@ class NavSearch extends Component{
     }
 }
 
-export default NavSearch
+const mapStateToProps = state => {
+    return {
+        stocks: state.stocks,
+        loading: state.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchStocks: () => dispatch(fetchStocks())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavSearch)
