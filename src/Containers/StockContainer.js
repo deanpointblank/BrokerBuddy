@@ -5,6 +5,7 @@ class StockConainer extends Component {
         return(
             <div>
                 <h1>This is the Stock Full info page</h1>
+                <h2>{this.props.match.params.stock}</h2>
             </div>
         )
     }
