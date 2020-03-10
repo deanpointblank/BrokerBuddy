@@ -17,11 +17,27 @@ class NavSearch extends Component{
     }
 
     handleChange(event){
+        let suggestions = []
+        if(event.target.value.length > 0){
+            const regex = new RegExp(`^${this.state.search}`, 'i')
+            const symb = this.props.stocks.sort().filter(stock => regex.test(stock.symb))
+            const name = this.props.stocks.sort().filter(stock => regex.test(stock.name))
+            suggestions = symb.concat(name)
+        }
         this.setState({
-            search: event.target.value
+            search: event.target.value,
+            suggestions: suggestions
         })
-        
     }
+
+    isLoading(){
+        if(this.props.loading === true){
+            return(
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            )
+        }
+    }
+
 
     render(){
         return(
@@ -33,8 +49,17 @@ class NavSearch extends Component{
                     aria-label="Search"
                     value = {this.state.search}
                     onChange={event => this.handleChange(event)}
+                    list = "stocks"
                 />
-                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <datalist id="stocks">
+                    {this.state.suggestions.slice(0, 4).map( (stock) =>
+                        <option key={stock.id} value={stock.symb}>{stock.name}</option>
+                    )}
+                </datalist>
+                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+                {this.isLoading()}
+                    Search
+                </button>
             </form>
         )
     }
@@ -42,8 +67,8 @@ class NavSearch extends Component{
 
 const mapStateToProps = state => {
     return {
-        stocks: state.stocks,
-        loading: state.loading
+        stocks: state.StockReducer.stocks,
+        loading: state.StockReducer.loading
     }
 }
 
