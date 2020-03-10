@@ -8910,5 +8910,5 @@ Y|ZYXI|Zynex, Inc. - Common Stock|Q|S|N|100|N|N||ZYXI|N"
 
 stocks_lines.split(/$/).each{|stock_line|
   stock = stock_line.split('|')
-  puts "Stock.create(symb: '#{stock[1]}', name: '#{stock[2]}')"
+  Stock.create(symb: stock[1], name: stock[2])
 }
