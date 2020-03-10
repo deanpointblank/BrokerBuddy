@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_10_012539) do
+ActiveRecord::Schema.define(version: 2020_03_10_052106) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "symb"
@@ -35,14 +35,24 @@ ActiveRecord::Schema.define(version: 2020_03_10_012539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "watchlist_stocks", force: :cascade do |t|
+    t.integer "watchlist_id", null: false
+    t.integer "stock_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_watchlist_stocks_on_stock_id"
+    t.index ["watchlist_id"], name: "index_watchlist_stocks_on_watchlist_id"
+  end
+
   create_table "watchlists", force: :cascade do |t|
     t.string "name"
-    t.text "stocks"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
+  add_foreign_key "watchlist_stocks", "stocks"
+  add_foreign_key "watchlist_stocks", "watchlists"
   add_foreign_key "watchlists", "users"
 end
