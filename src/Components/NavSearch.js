@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchStocks } from '../Actions/StockActions'
-//import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 
 class NavSearch extends Component{
@@ -9,8 +9,8 @@ class NavSearch extends Component{
         super();
         this.state = {
             search: '',
-            suggestions: []
-            //completeSearch: false
+            suggestions: [],
+            completeSearch: false
         }
     }
 
@@ -43,18 +43,22 @@ class NavSearch extends Component{
 
     handleOnSubmit(event){
         event.preventDefault()
-        
         this.setState({
-            search: "",
-            suggestions: []
+            completeSearch: true
         })
     }
 
     render(){
 
-        // if (this.state.completeSearch === true){
-        //     return <Redirect to='/stock' />
-        // }
+        if (this.state.completeSearch === true){
+            const stock = this.state.search
+            this.setState({
+                search: "",
+                suggestions: [],
+                completeSearch: false
+            })
+            return <Redirect to={`/stock/${stock}`} />
+        }
 
         return (
             <form onSubmit={event => this.handleOnSubmit(event)} className="form-inline" autoComplete='off'>
