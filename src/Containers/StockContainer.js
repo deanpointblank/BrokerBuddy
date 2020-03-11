@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStockInfo } from '../Actions/StockActions';
+import { NewsItem } from '../Components/StockContainerComponents/StockNews'
 
 class StockConainer extends Component {
 
@@ -34,7 +35,9 @@ class StockConainer extends Component {
                     <h1>Graph Component</h1>
                     <p>{stockInfo[stock].company.description}</p>
                     <div>
-                        <h2>News Component</h2>
+                        <ul class="list-unstyled">
+                            { stockInfo[stock].news.map(news => <NewsItem news={news}/>) }
+                        </ul>
                     </div>
                 </div>
             )
