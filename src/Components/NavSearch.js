@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchStocks } from '../Actions/StockActions'
+//import { Redirect } from 'react-router-dom'
+
 
 class NavSearch extends Component{
     constructor(){
@@ -8,6 +10,7 @@ class NavSearch extends Component{
         this.state = {
             search: '',
             suggestions: []
+            //completeSearch: false
         }
     }
 
@@ -38,10 +41,23 @@ class NavSearch extends Component{
         }
     }
 
+    handleOnSubmit(event){
+        event.preventDefault()
+        
+        this.setState({
+            search: "",
+            suggestions: []
+        })
+    }
 
     render(){
-        return(
-            <form className="form-inline" autoComplete='off'>
+
+        // if (this.state.completeSearch === true){
+        //     return <Redirect to='/stock' />
+        // }
+
+        return (
+            <form onSubmit={event => this.handleOnSubmit(event)} className="form-inline" autoComplete='off'>
                 <input
                     className="form-control mr-sm-2"
                     type="search"
