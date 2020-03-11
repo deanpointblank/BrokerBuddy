@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStockInfo } from '../Actions/StockActions';
-import { NewsItem } from '../Components/StockContainerComponents/StockNews'
+import { NewsItem } from '../Components/StockContainerComponents/StockNews';
+import StockChart from '../Components/StockContainerComponents/StockChart'
 
 class StockConainer extends Component {
 
@@ -32,7 +33,7 @@ class StockConainer extends Component {
                         <li>percent change during day: {stockInfo[stock].chart[19].changePercent}%</li>
                         <li>percent change after hours</li>
                     </ul>
-                    <h1>Graph Component</h1>
+                    <StockChart />
                     <p>{stockInfo[stock].company.description}</p>
                     <div>
                         <ul class="list-unstyled">
