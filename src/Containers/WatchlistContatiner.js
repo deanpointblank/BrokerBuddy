@@ -8,7 +8,7 @@ class WatchlistContainer extends Component {
             <div className="container">
                 <h1>This is the Stock Watchlist page</h1>
                 <div className="row">
-                    <table className="table col-9">
+                    <table className="table col-8">
                         <thead>
                             <tr>
                             <th scope="col">#</th>
@@ -23,6 +23,12 @@ class WatchlistContainer extends Component {
                     </table>
 
                     <ul className="nav flex-column">
+                        <li className="input-group mb-3 nav-item">
+                            <input type="text" className="form-control" placeholder="Watchlist name" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                            <div className="input-group-append">
+                                <button className="btn btn-outline-secondary" type="button" id="button-addon2">Add Watchlist</button>
+                            </div>
+                        </li>
                         <li className="nav-item">
                             <a className="nav-link active" href="#">Active</a>
                         </li>

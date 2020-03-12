@@ -1,14 +1,14 @@
 class WatchlistsController < ApplicationController
 
     def index
-        watchlists = Watchlist.all
+        watchlists = current_user.watchlists.all
 
         render json: watchlists.as_json
     end
 
 
     def create
-        watchlist = current_user.watchlist.build(name: params[:name])
+        watchlist = current_user.watchlists.build(name: params[:name])
     
         if watchlist.save
           render json: watchlist.as_json, status: :created
