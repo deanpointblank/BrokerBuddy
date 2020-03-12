@@ -33,7 +33,7 @@ class StockConainer extends Component {
                         <li>percent change during day: {stockInfo[stock].chart[19].changePercent}%</li>
                         <li>percent change after hours</li>
                     </ul>
-                    <StockChart />
+                    <StockChart data={stockInfo[stock].chart}/>
                     <p>{stockInfo[stock].company.description}</p>
                     <div>
                         <ul class="list-unstyled">

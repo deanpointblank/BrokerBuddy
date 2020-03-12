@@ -18,6 +18,11 @@ const StockReducer = (state = {stocks: [], loading: false, stockInfo: [], infoLo
                 stockInfo: [...state.stockInfo],
                 infoLoading: true
             }
+        case 'LOADING_INFO_TRUE':
+            return {
+                ...state,
+                infoLoading: true
+            }
         case 'ADD_STOCK_INFO':
             return {
                 ...state,

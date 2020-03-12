@@ -1,52 +1,45 @@
 import React, { Component } from 'react';
-import { Chart } from 'chart.js'
+import * as V from 'victory';
 
 export default class StockChart extends Component{  
 
+    data = () => {
+        this.props.data.map(data => {
+            console.log({x: data.close, y: data.date})
+            return  {x: data.date, y: data.close}
+        })
+    }
+
     render(){
 
-        const ctx = document.getElementById('myChart').getContext('2d');
-        const myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
+        console.log(this.data)
 
         return(
             <div>
                 <h1>CHART IN PROG</h1>
-                <canvas id="myChart" width="400" height="400"></canvas>
+                <V.VictoryChart
+                minDomain={{ y: 0 }}
+                >
+                    <V.VictoryLine
+                        interpolation='linear'
+                        data={this.props.data.map(data => {
+                            return {x: data.date, y: data.close}
+                            })
+                        }
+                        style={{
+                            data: { stroke: "#c43a31" },
+                            parent: { border: "1px solid #ccc"}
+                          }}
+                    />
+                    <V.VictoryScatter
+                        data={this.props.data.map(data => {
+                            return {x: data.date, y: data.close}
+                            })
+                        }
+                        size={1}
+                        style={{ data: { fill: "#c43a31" } }}
+                    />
+                </V.VictoryChart>
             </div>
         )
     }

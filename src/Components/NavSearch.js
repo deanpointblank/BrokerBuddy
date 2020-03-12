@@ -36,13 +36,14 @@ class NavSearch extends Component{
     isLoading(){
         if(this.props.loading === true){
             return(
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
             )
         }
     }
 
     handleOnSubmit(event){
         event.preventDefault()
+        this.props.infoLoadingTrue()
         this.setState({
             completeSearch: true
         })
@@ -57,6 +58,7 @@ class NavSearch extends Component{
                 suggestions: [],
                 completeSearch: false
             })
+
             return <Redirect to={`/stock/${stock}`} />
         }
 
@@ -94,6 +96,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        infoLoadingTrue: () => dispatch({type: 'LOADING_INFO_TRUE'}),
         fetchStocks: () => dispatch(fetchStocks())
     }
 }
