@@ -26,7 +26,7 @@ class StockConainer extends Component {
         } else {
             return(
                 <div>
-                    <h1>{stockInfo[stock].quote.symbol} <img src={stockInfo[stock].logo.url}/></h1>
+                    <h1>{stockInfo[stock].quote.symbol} <img src={stockInfo[stock].logo.url}/> <button type="button" className="btn btn-outline-primary" onClick={(event)=> console.log(event.type)}>Add Stock to watchlist</button></h1>
                     <h3>{stockInfo[stock].quote.companyName}</h3>
                     <ul>
                         <li>stock price: {stockInfo[stock].quote.iexRealtimePrice}</li>
