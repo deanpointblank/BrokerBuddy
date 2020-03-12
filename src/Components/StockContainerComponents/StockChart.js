@@ -11,9 +11,6 @@ export default class StockChart extends Component{
     }
 
     render(){
-
-        console.log(this.data)
-
         return(
             <div>
                 <h1>CHART IN PROG</h1>
