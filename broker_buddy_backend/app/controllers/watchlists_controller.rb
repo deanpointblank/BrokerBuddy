@@ -10,9 +10,9 @@ class WatchlistsController < ApplicationController
 
     def create
         watchlist = current_user.watchlists.build(name: params[:name])
-    
+        watchlists = current_user.watchlists.all
         if watchlist.save
-          render json: watchlist.as_json, status: :created
+          render json: watchlists.as_json, status: :created
         else
           head(:unauthorized)
         end

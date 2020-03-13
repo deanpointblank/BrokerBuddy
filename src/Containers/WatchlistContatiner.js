@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import Stock from '../Components/Stock';
+import Stock from '../Components/WatchlistContainerComponents/Stock';
 
 import { connect } from 'react-redux';
 
