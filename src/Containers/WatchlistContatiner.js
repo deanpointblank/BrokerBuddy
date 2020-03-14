@@ -37,10 +37,11 @@ class WatchlistContainer extends Component {
                     <table className="table col-8">
                         <thead>
                             <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
+                            <th scope="col">Symbol</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Share Price</th>
+                            <th scope="col">MovementToday</th>
+                            <th scope="col">MarketCap</th>
                             </tr>
                         </thead>
                         <tbody>

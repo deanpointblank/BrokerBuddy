@@ -4,7 +4,8 @@ class WatchlistsController < ApplicationController
     def index
         watchlists = current_user.watchlists.all
 
-        render json: watchlists.as_json
+
+        render json: watchlists.as_json(include: :stocks)
     end
 
 
