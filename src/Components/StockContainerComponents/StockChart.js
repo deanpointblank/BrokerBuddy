@@ -3,13 +3,6 @@ import * as V from 'victory';
 
 export default class StockChart extends Component{  
 
-    data = () => {
-        this.props.data.map(data => {
-            console.log({x: data.close, y: data.date})
-            return  {x: data.date, y: data.close}
-        })
-    }
-
     render(){
         return(
             <div>
