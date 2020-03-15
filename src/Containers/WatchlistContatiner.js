@@ -12,7 +12,7 @@ class WatchlistContainer extends Component {
     constructor(){
         super()
         this.state = {
-            watchlist: ''
+            watchlistName: ''
         }
     }
 
@@ -24,8 +24,10 @@ class WatchlistContainer extends Component {
 
     addWatchlist = (event) =>{
         event.preventDefault()
-        console.log(this.state.watchlist)
-        this.props.addWatchlist(this.props.userEmail, this.props.userToken, this.state.watchlist)
+        console.log(this.state.watchlistName)
+        if(this.props.loggedIn){
+            this.props.addWatchlist(this.props.userEmail, this.props.userToken, this.state.watchlist)
+        }
     }
 
     handleChange = (event) =>{
@@ -54,7 +56,7 @@ class WatchlistContainer extends Component {
                             <Stock />
                         </tbody>
                     </table>
-                    <Watchlists loading={this.props.WatchlistLoading} watchlistsName={this.state.watchlistName} handleChange={this.handleChange} watchlists={this.props.watchlists}/>
+                    <Watchlists loading={this.props.WatchlistLoading} watchlistsName={this.state.watchlistName} handleChange={this.handleChange} watchlists={this.props.watchlists} addWatchlist={this.addWatchlist}/>
 
                 </div>
             </div>

@@ -9,7 +9,7 @@ export default class Watchlists extends Component{
 
            return(
                 <ul className="nav flex-column">
-                    <div className="d-flex justify-content-center">
+                    <div className="text-center">
                         <div className="spinner-border" role="status">
                             <span className="sr-only">Loading...</span>
                         </div>
@@ -31,13 +31,19 @@ export default class Watchlists extends Component{
                             onChange={event => this.props.handleChange(event)}
                         />
                         <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(event) => this.addWatchlist(event)}>Add Watchlist</button>
+                            <button 
+                                className="btn btn-outline-secondary" 
+                                type="button" 
+                                id="button-addon2" 
+                                onClick={(event) => this.props.addWatchlist(event)}>
+                                 Add Watchlist
+                            </button>
                         </div>
                     </li>
                     {
                         this.props.watchlists.map(list => 
                             <li key={list.id} className="nav-item">
-                                <a className="nav-link active" href="#">{list.name}</a>
+                                <a className="nav-link active" href="#">{list.name}<button type="button" className="close" aria-label="Close" onClick={event =>console.log(list.id)}><span aria-hidden="true">&times;</span></button></a>
                             </li>
                         )
                     }
