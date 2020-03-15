@@ -6,11 +6,12 @@ import StockReducer from './StockReducer'
 import WatchlistsReducer from './WatchlistsReducer'
 
 
+
 export const allReducers = combineReducers({
     userReducer: userReducer,
     CurrentUserReducer: CurrentUserReducer,
     RegistrationsReducer: RegistrationsStatusReducer,
     StockReducer: StockReducer,
-    WatchlistsReducer: WatchlistsReducer
+    WatchlistsReducer: WatchlistsReducer,
 
 })

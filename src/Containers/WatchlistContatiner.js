@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import { addWatchlist } from '../Actions/WatchlistActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
+import { deleteWatchlist } from '../Actions/WatchlistActions'
 
 class WatchlistContainer extends Component {
     constructor(){
@@ -26,7 +27,16 @@ class WatchlistContainer extends Component {
         event.preventDefault()
         console.log(this.state.watchlistName)
         if(this.props.loggedIn){
-            this.props.addWatchlist(this.props.userEmail, this.props.userToken, this.state.watchlist)
+            this.props.addWatchlist(this.props.userEmail, this.props.userToken, this.state.watchlistName)
+        }
+        this.setState({
+            watchlistName: ''
+        })
+    }
+
+    deleteList = (id) =>{
+        if(this.props.loggedIn){
+            this.props.deleteWatchlist(this.props.userEmail, this.props.userToken, id)
         }
     }
 
@@ -56,7 +66,14 @@ class WatchlistContainer extends Component {
                             <Stock />
                         </tbody>
                     </table>
-                    <Watchlists loading={this.props.WatchlistLoading} watchlistsName={this.state.watchlistName} handleChange={this.handleChange} watchlists={this.props.watchlists} addWatchlist={this.addWatchlist}/>
+                    <Watchlists
+                        loading={this.props.WatchlistLoading}
+                        watchlistName={this.state.watchlistName}
+                        handleChange={this.handleChange}
+                        watchlists={this.props.watchlists}
+                        addWatchlist={this.addWatchlist}
+                        deleteList={this.deleteList}
+                    />
 
                 </div>
             </div>
@@ -77,7 +94,8 @@ const mapStateToProps = state =>{
 const mapDispatchToProps = dispatch =>{
     return {
         addWatchlist: (userEmail, userKey, watchlistName) => dispatch(addWatchlist(userEmail, userKey, watchlistName)),
-        fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey))
+        fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
+        deleteWatchlist: (userEmail, userKey, watchlistId) => dispatch(deleteWatchlist(userEmail, userKey, watchlistId))
     }
 }
 

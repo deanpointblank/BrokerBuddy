@@ -43,7 +43,20 @@ export default class Watchlists extends Component{
                     {
                         this.props.watchlists.map(list => 
                             <li key={list.id} className="nav-item">
-                                <a className="nav-link active" href="#">{list.name}<button type="button" className="close" aria-label="Close" onClick={event =>console.log(list.id)}><span aria-hidden="true">&times;</span></button></a>
+                                <a 
+                                    className="nav-link active"
+                                    href="#">
+                                        {list.name}
+                                        <button 
+                                        type="button" 
+                                        className="close" 
+                                        aria-label="Close" 
+                                        onClick={() =>this.props.deleteList(list.id)}>
+                                            <span aria-hidden="true">
+                                                &times;
+                                            </span>
+                                        </button>
+                                </a>
                             </li>
                         )
                     }

@@ -32,8 +32,12 @@ class WatchlistsController < ApplicationController
     end
   
     def destroy
+      binding.pry
       watchlist = Watchlist.find(id: params[:id])
       watchlist.destroy
+
+      watchlists = current_user.watchlists.all
+      render json: watchlists.as_json, status: :deleted
   
     end
 
