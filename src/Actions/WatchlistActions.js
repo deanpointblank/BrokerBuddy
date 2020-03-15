@@ -1,6 +1,6 @@
 export const fetchWatchlists = (userEmail, userKey) => {
     return(dispatch) => {
-        //dispatch({ type: 'LOADING_STOCKS' })
+        dispatch({ type: 'LOADING_WATCHLISTS' })
         fetch('http://localhost:3001/watchlists', {
             method: 'GET',
             headers: {
@@ -13,7 +13,7 @@ export const fetchWatchlists = (userEmail, userKey) => {
         .then(resp => {
             console.log(resp.status)
             return resp.json()})
-        .then(resp => console.log(resp))
+        .then(resp => dispatch({type: 'ADD_WATCHLISTS', watchlists: resp}))
     }
 
 }

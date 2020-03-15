@@ -17,7 +17,7 @@ class WatchlistContainer extends Component {
     }
 
     componentDidMount(){
-        if(!!this.props.userEmail){
+        if(this.props.loggedIn){
             this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
         }
     }
@@ -30,7 +30,7 @@ class WatchlistContainer extends Component {
 
     handleChange = (event) =>{
         this.setState({
-            watchlist: event.target.value
+            watchlistName: event.target.value
         })
     }
 
@@ -54,7 +54,7 @@ class WatchlistContainer extends Component {
                             <Stock />
                         </tbody>
                     </table>
-                    <Watchlists watchlists={this.state.watchlist} handleChange={this.handleChange}/>
+                    <Watchlists loading={this.props.WatchlistLoading} watchlistsName={this.state.watchlistName} handleChange={this.handleChange} watchlists={this.props.watchlists}/>
 
                 </div>
             </div>
@@ -65,6 +65,9 @@ const mapStateToProps = state =>{
     return {
         userEmail: state.CurrentUserReducer.email,
         userToken: state.CurrentUserReducer.authentication_token,
+        loggedIn: state.CurrentUserReducer.logged_in,
+        watchlists: state.WatchlistsReducer.watchlists,
+        watchlistLoading: state.WatchlistsReducer.loading
     }
 }
 
