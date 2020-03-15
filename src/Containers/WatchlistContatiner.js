@@ -16,6 +16,12 @@ class WatchlistContainer extends Component {
         }
     }
 
+    componentDidMount(){
+        if(!!this.props.userEmail){
+            this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
+        }
+    }
+
     addWatchlist = (event) =>{
         event.preventDefault()
         console.log(this.state.watchlist)

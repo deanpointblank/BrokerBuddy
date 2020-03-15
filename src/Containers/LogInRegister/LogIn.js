@@ -44,7 +44,7 @@ class Login extends Component{
                         <div className="col-sm-5 my-auto">
                             <form onSubmit={event => this.handleOnSubmit(event)} className='justify-content-center'>
                                 <div className="form-group">
-                                <label for='email'>Email</label>
+                                <label htmlFor='email'>Email</label>
                                 <input 
                                     type='email'
                                     name='email'
@@ -55,7 +55,7 @@ class Login extends Component{
                                 />
                                 </div>
                                 <div className="form-group">
-                                <label for='password'>Password</label>
+                                <label htmlFor='password'>Password</label>
                                 <input
                                     type='password'
                                     name='password'
