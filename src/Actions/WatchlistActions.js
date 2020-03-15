@@ -44,8 +44,8 @@ export const addWatchlist = (userEmail, userKey, watchlistName) => {
 export const deleteWatchlist = (userEmail, userKey, watchlistId) => {
     return(dispatch) => {
         dispatch({ type: 'LOADING_WATCHLISTS' })
-        fetch(`http://localhost:3001/watchlists/`, {
-            method: 'DELETE',
+        fetch(`http://localhost:3001/watchlists/delete`, {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
