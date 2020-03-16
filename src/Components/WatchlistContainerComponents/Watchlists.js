@@ -45,7 +45,7 @@ export default class Watchlists extends Component{
                             <li key={list.id} className="nav-item">
                                 <a 
                                     className="nav-link active"
-                                    href="#">
+                                    onClick={() => this.props.setWatchlist(list)}>
                                         {list.name}
                                         <button 
                                         type="button" 

@@ -13,7 +13,8 @@ class WatchlistContainer extends Component {
     constructor(){
         super()
         this.state = {
-            watchlistName: ''
+            watchlistName: '',
+            currentWatchlist: []
         }
     }
 
@@ -46,17 +47,23 @@ class WatchlistContainer extends Component {
         })
     }
 
-    seeWatchlist = () => {
-       if(this.props.loggedIn && this.props.watchlists.length !== 0 ){
-           return(
-               {}
-           )
-       } else {
-           return(
-               {}
-           )
-       }
+    setCurrentWatchlist = (list) =>{
+        this.setState({
+            currentWatchlist: list
+        })
     }
+
+    // seeWatchlist = () => {
+    //    if(this.props.loggedIn && this.props.watchlists.length !== 0 ){
+    //        return(
+    //            {}
+    //        )
+    //    } else {
+    //        return(
+    //            {}
+    //        )
+    //    }
+    // }
 
 
     render(){
@@ -100,6 +107,7 @@ class WatchlistContainer extends Component {
                         watchlists={this.props.watchlists}
                         addWatchlist={this.addWatchlist}
                         deleteList={this.deleteList}
+                        setWatchlist={this.setCurrentWatchlist}
                     />
 
                 </div>

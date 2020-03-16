@@ -42,7 +42,7 @@ class Register extends Component{
     }
 
     render(){
-        {this.loggedin()}
+        this.loggedin()
         return(
             <form onSubmit={event => this.handleOnSubmit(event)}>
                 <div className='form-group'>
