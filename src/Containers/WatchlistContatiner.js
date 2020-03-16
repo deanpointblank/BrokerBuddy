@@ -46,8 +46,35 @@ class WatchlistContainer extends Component {
         })
     }
 
+    seeWatchlist = () => {
+       if(this.props.loggedIn && this.props.watchlists.length !== 0 ){
+           return(
+               {}
+           )
+       } else {
+           return(
+               {}
+           )
+       }
+    }
+
 
     render(){
+
+
+        if(this.props.WatchlistLoading){
+
+            return(
+                 <ul className="nav flex-column">
+                     <div className="text-center">
+                         <div className="spinner-border" role="status">
+                             <span className="sr-only">Loading...</span>
+                         </div>
+                     </div>
+                 </ul>
+             ) 
+         } else {
+
         return(
             <div className="container">
                 <h1>This is the Stock Watchlist page</h1>
@@ -77,7 +104,7 @@ class WatchlistContainer extends Component {
 
                 </div>
             </div>
-        )
+        )}
     }
 }
 const mapStateToProps = state =>{

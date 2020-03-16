@@ -14,9 +14,10 @@ import { allReducers } from './Reducers/index'
 
 import Navbar from './Components/Navbar'
 import UserContainer from './Containers/UserContainer';
-import Login from './Containers/LogInRegister/LogIn'
-import Register from './Containers/LogInRegister/Register'
-import WatchlistContainer from './Containers/WatchlistContatiner'
+import Login from './Containers/LogInRegister/LogIn';
+import Logout from './Containers/LogInRegister/Logout';
+import Register from './Containers/LogInRegister/Register';
+import WatchlistContainer from './Containers/WatchlistContatiner';
 import StockConainer from './Containers/StockContainer';
 
 const store = createStore(allReducers, compose(
@@ -32,6 +33,7 @@ ReactDOM.render(
             <Route exact path="/" component={App} />
             <Route exact path="/user" component={UserContainer} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/logout" component={Logout} />
             <Route exact path="/signup" component={Register} />
             <Route exact path="/watchlist" component={WatchlistContainer} />
             <Route exact path="/stock/:stock" component={StockConainer} />

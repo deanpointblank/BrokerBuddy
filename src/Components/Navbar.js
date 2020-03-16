@@ -13,10 +13,10 @@ class Navbar extends Component {
                         <img src={require("../CSS/Images/rocket-19706.png")} width="30" height="30" alt="logo" />
                         BrokerBuddy
                     </NavLink>
-                            <div className="nav-item"><NavLink to="/watchlist" exact className="nav-link">Watch Lists</NavLink></div>
-                            <div className="nav-item"><NavLink to="/login" exact className="nav-link">Log in</NavLink></div>
-                            <div className="nav-item"><NavLink to="/signup" exact className="nav-link">Sign Up</NavLink></div>
-                            <NavSearch />
+                    <div className="nav-item"><NavLink to="/watchlist" exact className="nav-link">Watch Lists</NavLink></div>
+                    <div className="nav-item"><NavLink to="/login" exact className="nav-link">Log in</NavLink></div>
+                    <div className="nav-item"><NavLink to="/signup" exact className="nav-link">Sign Up</NavLink></div>
+                    <NavSearch />
                 </nav>
             )
         } else {
@@ -28,7 +28,7 @@ class Navbar extends Component {
                     </NavLink>
                     <div className="nav-item"><NavLink to="/user" exact className="nav-link">User</NavLink></div>
                     <div className="nav-item"><NavLink to="/watchlist" exact className="nav-link">Watch Lists</NavLink></div>
-                    <div className="nav-item"><NavLink to="#" exact className="nav-link">Log Out Pending</NavLink></div>
+                    <div className="nav-item"><NavLink to="/logout" exact className="nav-link">Log Out</NavLink></div>
                     <NavSearch />
                 </nav>
             )

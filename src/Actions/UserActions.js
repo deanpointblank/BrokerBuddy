@@ -39,3 +39,38 @@ export const login = (email, password) => {
         })
     }
 }
+
+export const logout = (userEmail, userKey) => {
+    return (dispatch) => {
+        dispatch({ type: 'SET_LOGOUT_PENDING', status: true})
+        dispatch({ type: 'SET_LOGOUT_SUCCESS', status: false})
+        dispatch({ type: 'SET_LOGOUT_ERROR', status: null})
+
+        fetch('http://localhost:3001/sessions', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-User-Email': userEmail,
+                'X-User-Token': userKey
+            },
+            // body: JSON.stringify({
+
+            // })
+        })
+        .then(resp => {
+            if(resp.status === 201){
+                dispatch({ type: 'DELETE_SESSION'})
+                dispatch({ type: 'SET_LOGOUT_PENDING', status: false})
+                dispatch({ type: 'SET_LOGOUT_SUCCESS', status: true})
+                dispatch({ type: 'SET_LOGOUT_ERROR', status: false})
+                return resp.json() 
+            }
+        })
+        .catch(error => {
+            dispatch({ type: 'SET_LOGIN_SUCCESS', status: false})
+            dispatch({ type: 'SET_LOGIN_ERROR', status: true})
+            console.log(error.message)
+        })
+    }
+}

@@ -14,7 +14,7 @@ class WatchlistsController < ApplicationController
         watchlist = current_user.watchlists.build(name: params[:name])
         watchlists = current_user.watchlists.all
         if watchlist.save
-          render json: watchlists.as_json, status: :created
+          render json: watchlists.as_json(include: :stocks), status: :created
         else
           head(:unauthorized)
         end
@@ -36,7 +36,7 @@ class WatchlistsController < ApplicationController
       watchlist.destroy
 
       watchlists = current_user.watchlists.all
-      render json: watchlists.as_json, status: :ok
+      render json: watchlists.as_json(include: :stocks), status: :ok
   
     end
 
