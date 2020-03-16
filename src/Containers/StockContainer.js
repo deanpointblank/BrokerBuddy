@@ -1,33 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStockInfo } from '../Actions/StockActions';
+import { fetchWatchlists } from '../Actions/WatchlistActions';
 import { NewsItem } from '../Components/StockContainerComponents/StockNews';
-import StockChart from '../Components/StockContainerComponents/StockChart'
+import StockChart from '../Components/StockContainerComponents/StockChart';
+
+import { Dropdown, Spinner } from 'react-bootstrap'
 
 class StockConainer extends Component {
 
     componentDidMount(){
         this.props.fetchStockInfo(this.props.match.params.stock)
+        this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
+
     }
 
     addStockButton = () => {
-        if(this.props.loggedIn){
+        if(this.props.watchlistLoading){
+            return(
+                <Spinner animation="border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </Spinner>
+            )
+
+        } else if(this.props.loggedIn && this.props.watchlists.length !== 0 && !this.props.watchlistLoading){
             return (
-                <div className="btn-group">
-                    <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
                         Add Stock to watchlist
-                    </button>
-                    <div className="dropdown-menu">
-                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Action</a>
-                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Another action</a>
-                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Something else here</a>
-                    <div className="dropdown-divider"></div>
-                    <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Separated link</a>
-                    </div>
-                </div>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        {this.props.watchlists.map(watchlist => {
+                            return(
+                                <Dropdown.Item href="#" onClick={(event)=> console.log(event.target)} >{watchlist.name}</Dropdown.Item>
+                            )
+                        })
+                        }
+                    </Dropdown.Menu>
+                </Dropdown>
             )
         }
     }
+
+
 
     render(){
 
@@ -71,16 +86,20 @@ class StockConainer extends Component {
 
 const mapStateToProps = state => {
     return {
+        userEmail: state.CurrentUserReducer.email,
+        userToken: state.CurrentUserReducer.authentication_token,
         stockInfo: state.StockReducer.stockInfo,
         infoLoading: state.StockReducer.infoLoading,
         watchlists: state.WatchlistsReducer.watchlists,
+        watchlistLoading: state.WatchlistsReducer.loading,
         loggedIn: state.CurrentUserReducer.logged_in
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
+        fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey))
     }
 }
 
