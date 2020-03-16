@@ -10,23 +10,46 @@ class StockConainer extends Component {
         this.props.fetchStockInfo(this.props.match.params.stock)
     }
 
+    addStockButton = () => {
+        if(this.props.loggedIn){
+            return (
+                <div className="btn-group">
+                    <button type="button" className="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Add Stock to watchlist
+                    </button>
+                    <div className="dropdown-menu">
+                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Action</a>
+                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Another action</a>
+                        <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Something else here</a>
+                    <div className="dropdown-divider"></div>
+                    <a className="dropdown-item" href="#" onClick={(event)=> console.log(event.target)} >Separated link</a>
+                    </div>
+                </div>
+            )
+        }
+    }
 
     render(){
 
         const stockInfo = {...this.props.stockInfo}
         const stock = this.props.match.params.stock
+
         if(this.props.infoLoading === true){
             return(
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                        <span className="sr-only">Loading...</span>
                     </div>
                 </div>
             )
         } else {
             return(
                 <div>
-                    <h1>{stockInfo[stock].quote.symbol} <img src={stockInfo[stock].logo.url}/> <button type="button" className="btn btn-outline-primary" onClick={(event)=> console.log(event.type)}>Add Stock to watchlist</button></h1>
+                    <h1>{stockInfo[stock].quote.symbol}
+                        <img src={stockInfo[stock].logo.url}/>
+                        <span />
+                        {this.addStockButton()}
+                    </h1>
                     <h3>{stockInfo[stock].quote.companyName}</h3>
                     <ul>
                         <li>stock price: {stockInfo[stock].quote.iexRealtimePrice}</li>
@@ -36,8 +59,8 @@ class StockConainer extends Component {
                     <StockChart data={stockInfo[stock].chart}/>
                     <p>{stockInfo[stock].company.description}</p>
                     <div>
-                        <ul class="list-unstyled">
-                            { stockInfo[stock].news.map(news => <NewsItem news={news}/>) }
+                        <ul className="list-unstyled">
+                            { stockInfo[stock].news.map(news => <NewsItem key={news.datetime} news={news}/>) }
                         </ul>
                     </div>
                 </div>
@@ -49,7 +72,9 @@ class StockConainer extends Component {
 const mapStateToProps = state => {
     return {
         stockInfo: state.StockReducer.stockInfo,
-        infoLoading: state.StockReducer.infoLoading
+        infoLoading: state.StockReducer.infoLoading,
+        watchlists: state.WatchlistsReducer.watchlists,
+        loggedIn: state.CurrentUserReducer.logged_in
     }
 }
 
