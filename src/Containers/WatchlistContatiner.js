@@ -68,6 +68,8 @@ class WatchlistContainer extends Component {
 
     render(){
 
+        let header = this.state.currentWatchlist.name ||  'Watchlists'
+        let stocks = this.state.currentWatchlist.stocks || []
 
         if(this.props.WatchlistLoading){
 
@@ -84,7 +86,7 @@ class WatchlistContainer extends Component {
 
         return(
             <div className="container">
-                <h1>This is the Stock Watchlist page</h1>
+                <h1>{header}</h1>
                 <div className="row">
                     <table className="table col-8">
                         <thead>
@@ -97,7 +99,7 @@ class WatchlistContainer extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <Stock />
+                            { stocks.map(stock => <Stock stock={stock}/>) }
                         </tbody>
                     </table>
                     <Watchlists
@@ -108,6 +110,7 @@ class WatchlistContainer extends Component {
                         addWatchlist={this.addWatchlist}
                         deleteList={this.deleteList}
                         setWatchlist={this.setCurrentWatchlist}
+                        currentWatchlist={this.state.currentWatchlist}
                     />
 
                 </div>

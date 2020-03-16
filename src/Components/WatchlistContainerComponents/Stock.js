@@ -4,10 +4,11 @@ export default class Stock extends Component{
     render(){
         return (
             <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <th scope="row">{this.props.stock.symb}</th>
+                <td>{this.props.stock.name}</td>
+                <td>tbd</td>
+                <td>tbd</td>
+                <td>tbd</td>
             </tr>
         )
     }
