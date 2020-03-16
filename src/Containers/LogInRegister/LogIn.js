@@ -21,6 +21,12 @@ class Login extends Component{
         backgroundRepeat: 'no-repeat'
     }
 
+    checklogin = user =>{
+        if(user){
+            this.props.history.push('/')
+        }
+    }
+
     handleOnChange(event){
         this.setState({
             [event.target.name]: event.target.value
@@ -37,6 +43,9 @@ class Login extends Component{
     }
 
     render(){
+
+        {this.checklogin(this.props.loggedIn)}
+
         return(
             <section>
                 <div className="container h-100">
@@ -75,6 +84,11 @@ class Login extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        loggedIn: state.CurrentUserReducer.logged_in
+    }
+}
 
 const mapDispatchToProps = dispatch =>{
     return {
@@ -83,4 +97,4 @@ const mapDispatchToProps = dispatch =>{
 }
 
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

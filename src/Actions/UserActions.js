@@ -46,20 +46,17 @@ export const logout = (userEmail, userKey) => {
         dispatch({ type: 'SET_LOGOUT_SUCCESS', status: false})
         dispatch({ type: 'SET_LOGOUT_ERROR', status: null})
 
-        fetch('http://localhost:3001/sessions', {
-            method: 'DELETE',
+        fetch('http://localhost:3001/sessions/logout', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
                 'X-User-Email': userEmail,
                 'X-User-Token': userKey
-            },
-            // body: JSON.stringify({
-
-            // })
+            }
         })
         .then(resp => {
-            if(resp.status === 201){
+            if(resp.status === 200){
                 dispatch({ type: 'DELETE_SESSION'})
                 dispatch({ type: 'SET_LOGOUT_PENDING', status: false})
                 dispatch({ type: 'SET_LOGOUT_SUCCESS', status: true})
@@ -67,6 +64,7 @@ export const logout = (userEmail, userKey) => {
                 return resp.json() 
             }
         })
+        .then(resp => console.log(resp))
         .catch(error => {
             dispatch({ type: 'SET_LOGIN_SUCCESS', status: false})
             dispatch({ type: 'SET_LOGIN_ERROR', status: true})
