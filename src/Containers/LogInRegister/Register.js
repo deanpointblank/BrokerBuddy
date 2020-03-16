@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { register } from '../../Actions/RegisterActions'
+
+import { register } from '../../Actions/RegisterActions';
 
 
 class Register extends Component{
@@ -24,15 +25,28 @@ class Register extends Component{
 
     handleOnSubmit(event){
         event.preventDefault()
-        console.log("Submit!")
         this.props.register(this.state.email, this.state.password, this.state.firstName, this.state.lastName)
+        this.setState({
+            email: '',
+            firstName: '',
+            lastName: '',
+            password: '',
+            confirmedPassword: ''
+        })
+    }
+
+    loggedin(){
+        if(this.props.loggedin){
+            this.props.history.push('/')
+        }
     }
 
     render(){
+        {this.loggedin()}
         return(
             <form onSubmit={event => this.handleOnSubmit(event)}>
                 <div className='form-group'>
-                <label for='email'>Email</label>
+                <label htmlFor='email'>Email</label>
                 <input 
                     type='email' 
                     name='email' 
@@ -44,7 +58,7 @@ class Register extends Component{
                 </div>
                 <div className='form-row'>
                     <div className='form-group col-md-6'>
-                        <label for='firstName'>First Name</label>
+                        <label htmlFor='firstName'>First Name</label>
                         <input 
                             type='text' 
                             name='firstName' 
@@ -55,7 +69,7 @@ class Register extends Component{
                         />
                     </div>
                     <div className='form-group col-md-6'>
-                        <label for='lastName'>Last Name</label>
+                        <label htmlFor='lastName'>Last Name</label>
                         <input 
                             type='text' 
                             name='lastName' 
@@ -68,7 +82,7 @@ class Register extends Component{
                 </div>
                 <div className='form-row'>
                     <div className='form-group col-md-6'>
-                        <label for='password'>Password</label>
+                        <label htmlFor='password'>Password</label>
                         <input 
                             type='password' 
                             name='password' 
@@ -79,7 +93,7 @@ class Register extends Component{
                         />
                     </div>
                     <div className='form-group col-md-6'>
-                        <label for='confirmPassowrd'>Comfirm Password</label>
+                        <label htmlFor='confirmPassowrd'>Comfirm Password</label>
                         <input 
                             type='password' 
                             name='confirmedPassword' 
@@ -96,10 +110,17 @@ class Register extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        registered: state.RegistrationsReducer.isRegisterSuccess,
+        loggedin: state.CurrentUserReducer.logged_in,
+    }
+} 
+
 const mapDispatchToProps = dispatch => {
     return{
-        register: (email, password, firstName, lastName) => dispatch(register(email, password, firstName, lastName))
+        register: (email, password, firstName, lastName) => dispatch(register(email, password, firstName, lastName)),
     }
 }
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

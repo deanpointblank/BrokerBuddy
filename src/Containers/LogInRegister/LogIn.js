@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { login } from '../../Actions/UserActions'
+import { login } from '../../Actions/UserActions';
 
-import Background from '../../CSS/Images/Gold_background.png'
+import Background from '../../CSS/Images/Gold_background.png';
 
 class Login extends Component{
     constructor(){
