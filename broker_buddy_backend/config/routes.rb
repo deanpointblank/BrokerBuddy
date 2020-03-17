@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :stocks, only: [:index]
-  resources :symbs, only: [:index]
+  resources :watchlist_stocks, only: [:create, :destroy]
+  post '/watchlist_stocks/delete' => 'watchlist_stocks#destroy'
+
   resources :watchlists, only: [:create, :destroy, :index]
   post '/watchlists/delete' => 'watchlists#destroy'
   devise_for :users, :controllers => {:registrations => 'registrations'}

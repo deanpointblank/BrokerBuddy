@@ -5,7 +5,8 @@ import { fetchWatchlists } from '../Actions/WatchlistActions';
 import { NewsItem } from '../Components/StockContainerComponents/StockNews';
 import StockChart from '../Components/StockContainerComponents/StockChart';
 
-import { Dropdown, Spinner } from 'react-bootstrap'
+import { Dropdown, Spinner, Button } from 'react-bootstrap'
+import * as I from 'react-icons/md'
 
 class StockConainer extends Component {
 
@@ -13,6 +14,34 @@ class StockConainer extends Component {
         this.props.fetchStockInfo(this.props.match.params.stock)
         this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
 
+    }
+
+    addRemoveStock = (watchlist) => {
+        const stock = this.props.match.params.stock
+        if(!!watchlist.stocks.find(stockItem => stockItem.symb === stock)){
+            return (
+                <Button variant="outline-danger"><I.MdClear/></Button>
+            )
+        } else {
+            return (
+                <Button variant="outline-success"><I.MdAdd/></Button>
+            )
+        }
+    }
+
+    addStockToWatchlist = (event, watchlist, stock) => {
+        event.preventDefault()
+        return null
+        //addToWatchlist(watchlist, stock)
+        // on click
+        // -prevent default
+        // -get stock id
+        // -send to server w watchlist id
+        // -create relationship
+        // -return lists
+    }
+    removeStockFromWatchlist = () => {
+        return null
     }
 
     addStockButton = () => {
@@ -31,8 +60,9 @@ class StockConainer extends Component {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {this.props.watchlists.map(watchlist => {
+                            console.log(watchlist)
                             return(
-                                <Dropdown.Item href="#" onClick={(event)=> console.log(event.target)} >{watchlist.name}</Dropdown.Item>
+                            <Dropdown.Item>{watchlist.name}{this.addRemoveStock(watchlist)} </Dropdown.Item>
                             )
                         })
                         }
