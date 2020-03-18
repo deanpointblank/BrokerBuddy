@@ -15,12 +15,17 @@ class WatchlistStocksController < ApplicationController
     end
 
     def destroy
-        binding.pry
-        watchlistStock = WatchlistStock.find(params[:id])
-        watchlistStock.destroy
-  
-        watchlists = current_user.watchlists.all
-        render json: watchlists.as_json(include: :stocks), status: :ok
+
+        watchlist_id = params[:watchlistId]
+        stock = Stock.find_by(symb: params[:stockSymb])
+
+        watchlistStock = WatchlistStock.find_by(watchlist_id: watchlist_id, stock_id: stock.id)
+        if watchlistStock.destroy
+            watchlists = current_user.watchlists.all
+            render json: watchlists.as_json(include: :stocks), status: :ok
+        else
+            head(:unauthorized)
+        end
     end
 
 end

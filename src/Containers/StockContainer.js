@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchStockInfo } from '../Actions/StockActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
 import { addStock } from '../Actions/AddRemoveStockAction';
+import { removeStock } from '../Actions/AddRemoveStockAction';
 import { NewsItem } from '../Components/StockContainerComponents/StockNews';
 import StockChart from '../Components/StockContainerComponents/StockChart';
 
@@ -22,7 +23,7 @@ class StockConainer extends Component {
         if(!!watchlist.stocks.find(stockItem => stockItem.symb === stock)){
             
             return (
-                <Button variant="outline-danger"><I.MdClear/></Button>
+                <Button variant="outline-danger" onClick={event => this.removeStockFromWatchlist(event, watchlist.id, stock)}><I.MdClear/></Button>
             )
         } else {
             
@@ -34,11 +35,13 @@ class StockConainer extends Component {
 
     addStockToWatchlist = (event, watchlist, stock) => {
         event.preventDefault()
-        console.log('clicked')
+        console.log('clicked-add')
         this.props.addStock(this.props.userEmail, this.props.userToken, watchlist, stock)
     }
-    removeStockFromWatchlist = () => {
-        return null
+    removeStockFromWatchlist = (event, watchlist, stock) => {
+        event.preventDefault()
+        console.log('clicked-remove')
+        this.props.removeStock(this.props.userEmail, this.props.userToken, watchlist, stock)
     }
 
     addStockButton = () => {
@@ -128,7 +131,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
         fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
-        addStock: (userEmail, userKey, watchlistId, stockId) => dispatch(addStock(userEmail, userKey, watchlistId, stockId))
+        addStock: (userEmail, userKey, watchlistId, stockId) => dispatch(addStock(userEmail, userKey, watchlistId, stockId)),
+        removeStock: (userEmail, userKey, watchlistId, stockId) => dispatch(removeStock(userEmail, userKey, watchlistId, stockId))
     }
 }
 
