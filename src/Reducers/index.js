@@ -12,6 +12,6 @@ export const allReducers = combineReducers({
     CurrentUserReducer: CurrentUserReducer,
     RegistrationsReducer: RegistrationsStatusReducer,
     StockReducer: StockReducer,
-    WatchlistsReducer: WatchlistsReducer,
+    WatchlistsReducer: WatchlistsReducer
 
 })

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStockInfo } from '../Actions/StockActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
+import { addStock } from '../Actions/AddRemoveStockAction';
 import { NewsItem } from '../Components/StockContainerComponents/StockNews';
 import StockChart from '../Components/StockContainerComponents/StockChart';
 
@@ -13,32 +14,28 @@ class StockConainer extends Component {
     componentDidMount(){
         this.props.fetchStockInfo(this.props.match.params.stock)
         this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
-
     }
 
     addRemoveStock = (watchlist) => {
         const stock = this.props.match.params.stock
+        
         if(!!watchlist.stocks.find(stockItem => stockItem.symb === stock)){
+            
             return (
                 <Button variant="outline-danger"><I.MdClear/></Button>
             )
         } else {
+            
             return (
-                <Button variant="outline-success"><I.MdAdd/></Button>
+                <Button variant="outline-success" onClick={event => this.addStockToWatchlist(event, watchlist.id, stock)}><I.MdAdd/></Button>
             )
         }
     }
 
     addStockToWatchlist = (event, watchlist, stock) => {
         event.preventDefault()
-        return null
-        //addToWatchlist(watchlist, stock)
-        // on click
-        // -prevent default
-        // -get stock id
-        // -send to server w watchlist id
-        // -create relationship
-        // -return lists
+        console.log('clicked')
+        this.props.addStock(this.props.userEmail, this.props.userToken, watchlist, stock)
     }
     removeStockFromWatchlist = () => {
         return null
@@ -53,6 +50,7 @@ class StockConainer extends Component {
             )
 
         } else if(this.props.loggedIn && this.props.watchlists.length !== 0 && !this.props.watchlistLoading){
+            
             return (
                 <Dropdown>
                     <Dropdown.Toggle variant="success" id="dropdown-basic">
@@ -129,7 +127,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
-        fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey))
+        fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
+        addStock: (userEmail, userKey, watchlistId, stockId) => dispatch(addStock(userEmail, userKey, watchlistId, stockId))
     }
 }
 
