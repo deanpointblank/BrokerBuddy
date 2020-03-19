@@ -12,6 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     def destroy
-    
+        binding.pry
     end
+
 end

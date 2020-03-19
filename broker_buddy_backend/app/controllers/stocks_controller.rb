@@ -4,4 +4,5 @@ class StocksController < ApplicationController
 
         render json: stocks.as_json(only: [:id, :symb, :name])
     end
+
 end
