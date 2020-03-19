@@ -131,8 +131,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
         fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
-        addStock: (userEmail, userKey, watchlistId, stockId) => dispatch(addStock(userEmail, userKey, watchlistId, stockId)),
-        removeStock: (userEmail, userKey, watchlistId, stockId) => dispatch(removeStock(userEmail, userKey, watchlistId, stockId))
+        addStock: (userEmail, userKey, watchlistId, stockSymb) => dispatch(addStock(userEmail, userKey, watchlistId, stockSymb)),
+        removeStock: (userEmail, userKey, watchlistId, stockSymb) => dispatch(removeStock(userEmail, userKey, watchlistId, stockSymb))
     }
 }
 

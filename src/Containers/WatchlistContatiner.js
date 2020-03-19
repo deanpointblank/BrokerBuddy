@@ -3,11 +3,13 @@ import { NavLink } from 'react-router-dom';
 import Stock from '../Components/WatchlistContainerComponents/Stock';
 import Watchlists from '../Components/WatchlistContainerComponents/Watchlists';
 
+
 import { connect } from 'react-redux';
 
 import { addWatchlist } from '../Actions/WatchlistActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
-import { deleteWatchlist } from '../Actions/WatchlistActions'
+import { deleteWatchlist } from '../Actions/WatchlistActions';
+import { removeStock } from '../Actions/AddRemoveStockAction';
 
 class WatchlistContainer extends Component {
     constructor(){
@@ -47,23 +49,24 @@ class WatchlistContainer extends Component {
         })
     }
 
+    remove = (stock) =>{
+        let watchlistReset = this.state.currentWatchlist.stocks.filter(watchlistStock => watchlistStock !== stock)
+        this.setState({
+            currentWatchlist: {
+                ...this.state.currentWatchlist,
+                stocks: watchlistReset
+            }
+        })
+    }
+
     setCurrentWatchlist = (list) =>{
+
         this.setState({
             currentWatchlist: list
         })
     }
 
-    // seeWatchlist = () => {
-    //    if(this.props.loggedIn && this.props.watchlists.length !== 0 ){
-    //        return(
-    //            {}
-    //        )
-    //    } else {
-    //        return(
-    //            {}
-    //        )
-    //    }
-    // }
+
 
 
     render(){
@@ -99,7 +102,17 @@ class WatchlistContainer extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            { stocks.map(stock => <Stock stock={stock}/>) }
+                            { stocks.map(stock => 
+                            <Stock
+                                stock={stock}
+                                removeStock={this.props.removeStock}
+                                watchlist={this.state.currentWatchlist}
+                                user={this.props.userEmail}
+                                token={this.props.userToken}
+                                key={stock.id}
+                                remove={this.remove}
+                            />
+                             ) }
                         </tbody>
                     </table>
                     <Watchlists
@@ -111,6 +124,7 @@ class WatchlistContainer extends Component {
                         deleteList={this.deleteList}
                         setWatchlist={this.setCurrentWatchlist}
                         currentWatchlist={this.state.currentWatchlist}
+
                     />
 
                 </div>
@@ -133,7 +147,8 @@ const mapDispatchToProps = dispatch =>{
     return {
         addWatchlist: (userEmail, userKey, watchlistName) => dispatch(addWatchlist(userEmail, userKey, watchlistName)),
         fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
-        deleteWatchlist: (userEmail, userKey, watchlistId) => dispatch(deleteWatchlist(userEmail, userKey, watchlistId))
+        deleteWatchlist: (userEmail, userKey, watchlistId) => dispatch(deleteWatchlist(userEmail, userKey, watchlistId)),
+        removeStock: (userEmail, userKey, watchlistId, stockId) => dispatch(removeStock(userEmail, userKey, watchlistId, stockId))
     }
 }
 
