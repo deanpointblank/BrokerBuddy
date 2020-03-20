@@ -6,8 +6,14 @@ Rails.application.routes.draw do
   resources :watchlists, only: [:create, :destroy, :index]
   post '/watchlists/delete' => 'watchlists#destroy'
 
-  post '/users/delete' => 'registrations#destroy'
+  
+  devise_scope :user do
+    post '/users/delete' => 'registrations#delete'
+  end
   devise_for :users, :controllers => {:registrations => 'registrations'}
+  
+  #devise_for :users, :path => '', :path_names => { :sign_in => "login", :sign_out => "logout", :sign_up => "register" }
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   resource :sessions, only: [:create, :destroy]

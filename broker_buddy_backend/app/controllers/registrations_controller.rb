@@ -11,8 +11,14 @@ class RegistrationsController < Devise::RegistrationsController
         end
     end
 
-    def destroy
-        binding.pry
+    def delete
+        user = User.find_by(email: params[:email])
+        if user && user.authentication_token == params[:userToken]
+            user.destroy
+            render status: :ok
+        else
+            head(:unauthorized)
+        end
     end
 
 end
