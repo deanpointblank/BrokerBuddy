@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchStocks } from '../Actions/StockActions'
+import { fetchStockInfo } from '../Actions/StockActions';
 import { Redirect } from 'react-router-dom'
 
 
@@ -43,7 +44,6 @@ class NavSearch extends Component{
 
     handleOnSubmit(event){
         event.preventDefault()
-        this.props.infoLoadingTrue()
         this.setState({
             completeSearch: true
         })
@@ -53,6 +53,8 @@ class NavSearch extends Component{
 
         if (this.state.completeSearch === true){
             const stock = this.state.search
+            this.props.fetchStockInfo(this.state.search)
+            this.props.infoLoadingTrue()
             this.setState({
                 search: "",
                 suggestions: [],
@@ -97,7 +99,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         infoLoadingTrue: () => dispatch({type: 'LOADING_INFO_TRUE'}),
-        fetchStocks: () => dispatch(fetchStocks())
+        fetchStocks: () => dispatch(fetchStocks()),
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
     }
 }
 

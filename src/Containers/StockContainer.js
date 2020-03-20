@@ -14,7 +14,9 @@ class StockConainer extends Component {
 
     componentDidMount(){
         this.props.fetchStockInfo(this.props.match.params.stock)
-        this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
+        if(this.props.loggedIn === true){
+            this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
+        }
     }
 
     addRemoveStock = (watchlist) => {
