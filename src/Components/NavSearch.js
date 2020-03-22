@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchStocks } from '../Actions/StockActions'
 import { fetchStockInfo } from '../Actions/StockActions';
 import { Redirect } from 'react-router-dom'
+import NotFound from '../Components/NotFound'
 
 
 class NavSearch extends Component{
@@ -21,8 +22,9 @@ class NavSearch extends Component{
     }
 
     handleChange(event){
+        const regexExempt = /\W/
         let suggestions = []
-        if(event.target.value.length > 0){
+        if(event.target.value.length > 0 && !event.target.value.match(regexExempt)){
             const regex = new RegExp(`^${this.state.search}`, 'i')
             const symb = this.props.stocks.sort().filter(stock => regex.test(stock.symb))
             const name = this.props.stocks.sort().filter(stock => regex.test(stock.name))
@@ -44,17 +46,19 @@ class NavSearch extends Component{
 
     handleOnSubmit(event){
         event.preventDefault()
-        this.setState({
-            completeSearch: true
-        })
+        if(!!this.props.stocks.filter(stock => stock.sym === this.state.search)){
+            this.props.fetchStockInfo(this.state.search)
+            this.props.infoLoadingTrue()
+            this.setState({
+                completeSearch: true
+            })
+        }
     }
 
     render(){
 
         if (this.state.completeSearch === true){
-            const stock = this.state.search
-            this.props.fetchStockInfo(this.state.search)
-            this.props.infoLoadingTrue()
+            const stock = this.state.search            
             this.setState({
                 search: "",
                 suggestions: [],
@@ -100,7 +104,8 @@ const mapDispatchToProps = dispatch => {
     return {
         infoLoadingTrue: () => dispatch({type: 'LOADING_INFO_TRUE'}),
         fetchStocks: () => dispatch(fetchStocks()),
-        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
+        
     }
 }
 

@@ -4,6 +4,9 @@ export const fetchStocks = () => {
         fetch('http://localhost:3001/stocks')
         .then(resp => resp.json())
         .then(resp => dispatch({ type: 'ADD_STOCKS', stocks: resp }))
+        .catch(error => {
+            dispatch({type: 'STOCK_ERROR', status: 'ERROR'})
+        })
     }
 }
 
@@ -14,5 +17,8 @@ export const fetchStockInfo = (stock) => {
         fetch(url)
         .then(resp => resp.json())
         .then(resp => dispatch({ type: 'ADD_STOCK_INFO', stockInfo: resp }))
+        .catch(error => {
+            dispatch({type: 'STOCK_ERROR', status: 'ERROR'})
+        })
     }
 }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchStockInfo } from '../Actions/StockActions';
+// import { fetchStockInfo } from '../Actions/StockActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
 import { addStock } from '../Actions/AddRemoveStockAction';
 import { removeStock } from '../Actions/AddRemoveStockAction';
 import { NewsItem } from '../Components/StockContainerComponents/StockNews';
+import { Redirect } from 'react-router-dom';
 import StockChart from '../Components/StockContainerComponents/StockChart';
 
 import { Dropdown, Spinner, Button } from 'react-bootstrap'
@@ -13,7 +14,7 @@ import * as I from 'react-icons/md'
 class StockConainer extends Component {
 
     componentDidMount(){
-        this.props.fetchStockInfo(this.props.match.params.stock)
+        // this.props.fetchStockInfo(this.props.match.params.stock)
         if(this.props.loggedIn === true){
             this.props.fetchWatchlists(this.props.userEmail, this.props.userToken)
         }
@@ -82,7 +83,11 @@ class StockConainer extends Component {
         const stockInfo = {...this.props.stockInfo}
         const stock = this.props.match.params.stock
 
-        if(this.props.infoLoading === true){
+        if(!this.props.stocks.includes(stock)){
+            return <Redirect to={'/404'} />
+        }
+
+        if(this.props.infoLoading === true && this.props.status !== 'ERROR'){
             return(
                 <div className="d-flex justify-content-center">
                     <div className="spinner-border" role="status">
@@ -90,7 +95,7 @@ class StockConainer extends Component {
                     </div>
                 </div>
             )
-        } else {
+        } else if (stockInfo !== {} && this.props.status !== 'ERROR') {
             return(
                 <div>
                     <h1>{stockInfo[stock].quote.symbol}
@@ -113,6 +118,8 @@ class StockConainer extends Component {
                     </div>
                 </div>
             )
+        } else if (this.props.status === 'ERROR'){
+            return <Redirect to={'/404'} />
         }
     }
 }
@@ -125,13 +132,15 @@ const mapStateToProps = state => {
         infoLoading: state.StockReducer.infoLoading,
         watchlists: state.WatchlistsReducer.watchlists,
         watchlistLoading: state.WatchlistsReducer.loading,
-        loggedIn: state.CurrentUserReducer.logged_in
+        loggedIn: state.CurrentUserReducer.logged_in,
+        status: state.StockReducer.status,
+        stocks: state.StockReducer.stocks
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
+        //fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
         fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
         addStock: (userEmail, userKey, watchlistId, stockSymb) => dispatch(addStock(userEmail, userKey, watchlistId, stockSymb)),
         removeStock: (userEmail, userKey, watchlistId, stockSymb) => dispatch(removeStock(userEmail, userKey, watchlistId, stockSymb))

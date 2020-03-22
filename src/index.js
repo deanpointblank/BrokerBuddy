@@ -19,6 +19,7 @@ import Logout from './Containers/LogInRegister/Logout';
 import Register from './Containers/LogInRegister/Register';
 import WatchlistContainer from './Containers/WatchlistContatiner';
 import StockConainer from './Containers/StockContainer';
+import NotFound from './Components/NotFound';
 
 const store = createStore(allReducers, compose(
     applyMiddleware(thunk),
@@ -37,6 +38,7 @@ ReactDOM.render(
             <Route exact path="/signup" component={Register} />
             <Route exact path="/watchlist" component={WatchlistContainer} />
             <Route exact path="/stock/:stock" component={StockConainer} />
+            <Route exact path="/404" component={NotFound} />
         </Router>
     </Provider>, 
     document.getElementById('root'));

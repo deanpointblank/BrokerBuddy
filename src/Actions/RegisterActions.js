@@ -52,9 +52,6 @@ export const register = (email, password, firstName, lastName) => {
 
 export const deleteUser = (userEmail, userKey) => {
     return(dispatch) => {
-        // dispatch({ type: 'SET_REGISTER_PENDING', status: true})
-        // dispatch({ type: 'SET_REGISTER_SUCCESS', status: false})
-        // dispatch({ type: 'SET_REGISTER_ERROR', status: null})
         dispatch({ type: 'SET_LOGOUT_PENDING', status: true})
         dispatch({ type: 'SET_LOGOUT_SUCCESS', status: false})
         dispatch({ type: 'SET_LOGOUT_ERROR', status: null})
