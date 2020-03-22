@@ -4,7 +4,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -31,14 +31,17 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Navbar />
-            <Route exact path="/" component={App} />
-            <Route exact path="/user" component={UserContainer} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/logout" component={Logout} />
-            <Route exact path="/signup" component={Register} />
-            <Route exact path="/watchlist" component={WatchlistContainer} />
-            <Route exact path="/stock/:stock" component={StockConainer} />
-            <Route exact path="/404" component={NotFound} />
+            <Switch>
+                <Route exact path="/" component={App} />
+                <Route exact path="/user" component={UserContainer} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/logout" component={Logout} />
+                <Route exact path="/signup" component={Register} />
+                <Route exact path="/watchlist" component={WatchlistContainer} />
+                <Route exact strict path="/stock/:stock" component={StockConainer} />
+                <Route exact path="/404" component={NotFound} />
+                <Route component={NotFound} />
+            </Switch>
         </Router>
     </Provider>, 
     document.getElementById('root'));

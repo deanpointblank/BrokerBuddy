@@ -77,15 +77,17 @@ class StockConainer extends Component {
     }
 
 
+    // if(!this.props.stocks.includes(stock)){
+    //     return <Redirect to={'/404'} />
+    // }
+
+
 
     render(){
 
         const stockInfo = {...this.props.stockInfo}
         const stock = this.props.match.params.stock
 
-        if(!this.props.stocks.includes(stock)){
-            return <Redirect to={'/404'} />
-        }
 
         if(this.props.infoLoading === true && this.props.status !== 'ERROR'){
             return(

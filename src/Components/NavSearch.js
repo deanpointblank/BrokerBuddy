@@ -46,13 +46,13 @@ class NavSearch extends Component{
 
     handleOnSubmit(event){
         event.preventDefault()
-        if(!!this.props.stocks.filter(stock => stock.sym === this.state.search)){
+        //if(!!this.props.stocks.filter(stock => stock.sym === this.state.search)){
             this.props.fetchStockInfo(this.state.search)
             this.props.infoLoadingTrue()
             this.setState({
                 completeSearch: true
             })
-        }
+        //}
     }
 
     render(){
