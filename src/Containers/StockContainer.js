@@ -99,7 +99,7 @@ class StockConainer extends Component {
             )
         } else if (stockInfo !== {} && this.props.status !== 'ERROR') {
             return(
-                <div>
+                <div className="container">
                     <h1>{stockInfo[stock].quote.symbol}
                         <img src={stockInfo[stock].logo.url}/>
                         <span />
@@ -107,9 +107,9 @@ class StockConainer extends Component {
                     </h1>
                     <h3>{stockInfo[stock].quote.companyName}</h3>
                     <ul>
-                        <li>stock price: {stockInfo[stock].quote.iexRealtimePrice}</li>
+                        <li>stock price: {stockInfo[stock].quote.latestPrice}</li>
                         <li>percent change during day: {stockInfo[stock].chart[19].changePercent}%</li>
-                        <li>percent change after hours</li>
+                        <li>current Volume: {stockInfo[stock].quote.latestVolume}</li>
                     </ul>
                     <StockChart data={stockInfo[stock].chart}/>
                     <p>{stockInfo[stock].company.description}</p>
