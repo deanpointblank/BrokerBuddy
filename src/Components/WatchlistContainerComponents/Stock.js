@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import * as I from 'react-icons/md'
 
 export default class Stock extends Component{
@@ -7,9 +8,7 @@ export default class Stock extends Component{
             <tr>
                 <th scope="row">{this.props.stock.symb}</th>
                 <td>{this.props.stock.name}</td>
-                <td>tbd</td>
-                <td>tbd</td>
-                <td>tbd</td>
+                <td><Button onClick={event => this.props.fetch(event, this.props.stock.symb)}>See More</Button></td>
                 <td>
                     <I.MdClear
                         onClick={event => {

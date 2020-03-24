@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+
 import Stock from '../Components/WatchlistContainerComponents/Stock';
 import Watchlists from '../Components/WatchlistContainerComponents/Watchlists';
 
@@ -10,13 +11,16 @@ import { addWatchlist } from '../Actions/WatchlistActions';
 import { fetchWatchlists } from '../Actions/WatchlistActions';
 import { deleteWatchlist } from '../Actions/WatchlistActions';
 import { removeStock } from '../Actions/AddRemoveStockAction';
+import { fetchStockInfo } from '../Actions/StockActions'
 
 class WatchlistContainer extends Component {
     constructor(){
         super()
         this.state = {
             watchlistName: '',
-            currentWatchlist: []
+            currentWatchlist: [],
+            stock: '',
+            fetched: false
         }
     }
 
@@ -66,6 +70,15 @@ class WatchlistContainer extends Component {
         })
     }
 
+    fetch = (event, stock) =>{
+        event.preventDefault()
+        this.setState({
+            stock: stock,
+            fetched: true
+        })
+        this.props.fetchStockInfo(stock)
+    }
+
 
 
 
@@ -73,6 +86,14 @@ class WatchlistContainer extends Component {
 
         let header = this.state.currentWatchlist.name ||  'Watchlists'
         let stocks = this.state.currentWatchlist.stocks || []
+
+        if (this.state.fetched === true){          
+            this.setState({
+                fetched: false
+            })
+
+            return <Redirect to={`/stock/${this.state.stock}`} />
+        }
 
         if(this.props.WatchlistLoading){
 
@@ -96,9 +117,7 @@ class WatchlistContainer extends Component {
                             <tr>
                             <th scope="col">Symbol</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Share Price</th>
-                            <th scope="col">MovementToday</th>
-                            <th scope="col">MarketCap</th>
+                            <th scope="col">Stock Page</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -111,6 +130,7 @@ class WatchlistContainer extends Component {
                                 token={this.props.userToken}
                                 key={stock.id}
                                 remove={this.remove}
+                                fetch={this.fetch}
                             />
                              ) }
                         </tbody>
@@ -147,6 +167,7 @@ const mapDispatchToProps = dispatch =>{
     return {
         addWatchlist: (userEmail, userKey, watchlistName) => dispatch(addWatchlist(userEmail, userKey, watchlistName)),
         fetchWatchlists: (userEmail, userKey) => dispatch(fetchWatchlists(userEmail, userKey)),
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
         deleteWatchlist: (userEmail, userKey, watchlistId) => dispatch(deleteWatchlist(userEmail, userKey, watchlistId)),
         removeStock: (userEmail, userKey, watchlistId, stockId) => dispatch(removeStock(userEmail, userKey, watchlistId, stockId))
     }

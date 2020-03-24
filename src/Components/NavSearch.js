@@ -104,7 +104,7 @@ const mapDispatchToProps = dispatch => {
     return {
         infoLoadingTrue: () => dispatch({type: 'LOADING_INFO_TRUE'}),
         fetchStocks: () => dispatch(fetchStocks()),
-        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock)),
+        fetchStockInfo: (stock) => dispatch(fetchStockInfo(stock))
         
     }
 }
