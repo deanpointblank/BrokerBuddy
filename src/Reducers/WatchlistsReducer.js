@@ -3,7 +3,7 @@ const WatchlistsReducer = (state = {watchlists: [], loading: false}, action) =>{
         case 'LOADING_WATCHLISTS':
             return {
                 ...state,
-                watchlists: [state.watchlists],
+                watchlists: state.watchlists,
                 loading: true
             }
         case 'ADD_WATCHLISTS':

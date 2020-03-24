@@ -95,6 +95,11 @@ class WatchlistContainer extends Component {
             return <Redirect to={`/stock/${this.state.stock}`} />
         }
 
+        if (this.props.loggedIn === false){         
+
+            return <Redirect to={`/`} />
+        }
+
         if(this.props.WatchlistLoading){
 
             return(

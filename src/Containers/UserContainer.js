@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { deleteUser } from '../Actions/RegisterActions';
 import { Button } from 'react-bootstrap'
+import { NavLink, Redirect } from 'react-router-dom';
 
 class UserContainer extends Component {
 
@@ -12,6 +13,10 @@ class UserContainer extends Component {
     }
 
     render(){
+        if(this.props.loggedIn === false){
+            return <Redirect to={`/`} />
+        }
+
         return(
             <div>
                 <h1>This is the Users main page</h1>
