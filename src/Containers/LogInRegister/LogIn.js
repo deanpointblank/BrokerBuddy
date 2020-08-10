@@ -12,6 +12,7 @@ class Login extends Component{
             email: '',
             password: ''
         }
+
     }
 
     sectionStyle = {
@@ -33,7 +34,7 @@ class Login extends Component{
         })
     }
 
-    handleOnSubmit(event){
+    handleOnSubmit(event) {
         event.preventDefault()
         this.props.login(this.state.email, this.state.password)
         this.setState({
@@ -51,7 +52,7 @@ class Login extends Component{
                 <div className="container h-100">
                     <div className="row h-100 justify-content-center align-items-center">
                         <div className="col-sm-5 my-auto">
-                            <form onSubmit={event => this.handleOnSubmit(event)} className='justify-content-center'>
+                            <form onSubmit={ event => this.handleOnSubmit(event) } className='justify-content-center'>
                                 <div className="form-group">
                                 <label htmlFor='email'>Email</label>
                                 <input 

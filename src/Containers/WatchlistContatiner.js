@@ -20,7 +20,8 @@ class WatchlistContainer extends Component {
             watchlistName: '',
             currentWatchlist: [],
             stock: '',
-            fetched: false
+            fetched: false,
+            buttonVal: 0
         }
     }
 
@@ -77,6 +78,26 @@ class WatchlistContainer extends Component {
             fetched: true
         })
         this.props.fetchStockInfo(stock)
+    }
+
+    addValue = () =>{
+        console.log('a');
+
+        fetch('http://localhost:3001/stocksjklfdfls')
+            .then(resp => {
+                if(resp.status !== 200) {
+                    throw new Error(resp.statusText);
+                } else {
+                    console.log('b');
+                    return resp.json()
+                }
+            })
+            .then(data => console.log('c', data))
+            .catch(err => console.log('d', err))
+
+        console.log('e')
+
+        // a, e, b, d
     }
 
 
@@ -152,6 +173,9 @@ class WatchlistContainer extends Component {
 
                     />
 
+                </div>
+                <div className='row'>
+                    <button onClick={this.addValue}>Click me</button><h3>{this.state.buttonVal}</h3>
                 </div>
             </div>
         )}
